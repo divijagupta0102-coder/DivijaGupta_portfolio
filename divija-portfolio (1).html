@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Divija Gupta — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blush:    #f8e8e1;
+      --lavender: #e8e1f5;
+      --mint:     #daf0e8;
+      --butter:   #f7f0d8;
+      --peach:    #fde8d0;
+      --lilac:    #ede0f7;
+      --sky:      #dceef8;
+      --rose:     #f5dde5;
+      --ink:      #1a1a1a;
+      --soft:     #5a4f5c;
+      --accent:   #c9a6c6;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fdf8f5;
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(253,248,245,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #ede5e0;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900; letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none; color: var(--soft);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding: 0 4rem; padding-top: 90px;
+      gap: 3rem; align-items: center;
+      background: linear-gradient(135deg, var(--blush) 0%, var(--lavender) 50%, var(--mint) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(201,166,198,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+
+    h1.hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 900; line-height: 1.0;
+      color: var(--ink); margin-bottom: 0.3rem;
+      letter-spacing: -0.03em;
+    }
+    h1.hero-name em {
+      font-style: italic; color: var(--soft);
+      display: block; font-size: 0.65em;
+    }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1.4rem;
+      color: var(--soft); margin: 1.2rem 0 2rem;
+      line-height: 1.5;
+    }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .chip {
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em;
+      border: 1.5px solid rgba(90,79,92,0.2);
+      background: rgba(255,255,255,0.55);
+      color: var(--soft);
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: var(--ink); color: #fff;
+      padding: 0.9rem 2.2rem; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(26,26,26,0.18);
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(26,26,26,0.25); }
+
+    /* hero illustration area */
+    .hero-visual {
+      position: relative; display: flex; justify-content: center; align-items: center;
+      z-index: 1;
+    }
+    .avatar-frame {
+      width: 340px; height: 420px;
+      background: linear-gradient(160deg, var(--rose) 0%, var(--lilac) 100%);
+      border-radius: 54% 46% 60% 40% / 45% 55% 45% 55%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9rem; position: relative;
+      box-shadow: 0 24px 60px rgba(201,166,198,0.35);
+      animation: morph 8s ease-in-out infinite;
+    }
+    @keyframes morph {
+      0%,100% { border-radius: 54% 46% 60% 40% / 45% 55% 45% 55%; }
+      33%      { border-radius: 46% 54% 42% 58% / 55% 45% 55% 45%; }
+      66%      { border-radius: 60% 40% 54% 46% / 42% 58% 42% 58%; }
+    }
+    .floating-badge {
+      position: absolute; background: #fff;
+      border-radius: 16px; padding: 0.7rem 1.1rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      font-size: 0.78rem; font-weight: 500; color: var(--soft);
+      display: flex; align-items: center; gap: 0.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    .badge-1 { top: 10%; right: -8%; animation-delay: 0s; }
+    .badge-2 { bottom: 18%; left: -10%; animation-delay: 1.2s; }
+    .badge-3 { top: 55%; right: -12%; animation-delay: 0.6s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 6rem 4rem; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
+    h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900; line-height: 1.1; color: var(--ink);
+      letter-spacing: -0.02em; margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--butter);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    }
+    .about-left {}
+    .about-right {}
+    .about-bio {
+      font-size: 1.05rem; line-height: 1.9; color: var(--soft);
+      margin-bottom: 1.5rem;
+    }
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+    }
+    .info-card {
+      background: rgba(255,255,255,0.65);
+      border-radius: 16px; padding: 1.2rem 1.4rem;
+      border: 1px solid rgba(201,166,198,0.25);
+    }
+    .info-card .label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
+    .info-card .value { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+
+    /* pets strip */
+    .pets-strip {
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, var(--rose), var(--lilac));
+      border-radius: 20px; padding: 1.5rem 1.8rem;
+      border: 1px solid rgba(201,166,198,0.3);
+    }
+    .pets-strip h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--ink);
+    }
+    .pets-icons { font-size: 1.6rem; letter-spacing: 0.3rem; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--sky); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.6rem;
+    }
+    .skill-card {
+      background: #fff; border-radius: 24px; padding: 2rem;
+      border: 1px solid rgba(201,166,198,0.2);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .skill-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--grad);
+    }
+    .skill-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.09); }
+    .skill-card .sk-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .skill-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem;
+    }
+    .skill-card p { font-size: 0.88rem; color: var(--soft); line-height: 1.7; }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--blush); }
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: 20px; overflow: hidden;
+      background: var(--placeholder);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; aspect-ratio: 1;
+      transition: transform 0.3s;
+      position: relative;
+    }
+    .gallery-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
+    .gallery-item.tall { grid-row: span 2; aspect-ratio: unset; min-height: 260px; }
+    .gallery-item:hover { transform: scale(1.02); }
+    .gallery-item .sketch-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(0deg, rgba(26,26,26,0.55), transparent);
+      color: #fff; font-size: 0.8rem; font-weight: 500;
+      padding: 1rem 1.2rem 0.9rem; opacity: 0; transition: opacity 0.25s;
+    }
+    .gallery-item:hover .sketch-label { opacity: 1; }
+
+    /* ── GOALS ── */
+    #goals {
+      background: linear-gradient(135deg, var(--lavender), var(--mint));
+    }
+    .goals-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .goal-steps { display: flex; flex-direction: column; gap: 1.4rem; }
+    .goal-step {
+      display: flex; gap: 1.4rem; align-items: flex-start;
+      background: rgba(255,255,255,0.55); border-radius: 20px;
+      padding: 1.4rem 1.6rem; border: 1px solid rgba(201,166,198,0.2);
+      transition: transform 0.2s;
+    }
+    .goal-step:hover { transform: translateX(6px); }
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: var(--accent);
+      line-height: 1; min-width: 2rem;
+    }
+    .step-text h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .step-text p { font-size: 0.85rem; color: var(--soft); line-height: 1.6; }
+    .ca-badge {
+      background: var(--ink); color: #fff;
+      border-radius: 28px; padding: 3rem;
+      text-align: center;
+    }
+    .ca-badge .big-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .ca-badge h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900; margin-bottom: 0.5rem;
+    }
+    .ca-badge p { font-size: 0.9rem; opacity: 0.7; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.65);
+      text-align: center; padding: 3rem 2rem;
+    }
+    footer .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;
+    }
+    footer p { font-size: 0.85rem; }
+    footer .socials { margin: 1.5rem 0; display: flex; justify-content: center; gap: 1.5rem; }
+    footer .socials span { font-size: 1.4rem; cursor: pointer; transition: transform 0.2s; }
+    footer .socials span:hover { transform: scale(1.3); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+      .hero-visual { display: none; }
+      section { padding: 4rem 1.5rem; }
+      #about, .goals-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-mosaic { grid-template-columns: repeat(2,1fr); }
+      .gallery-item.wide { grid-column: span 2; }
+    }
+
+    /* fade-in on scroll */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">D.G</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#gallery">Sketches</a></li>
+    <li><a href="#goals">Goals</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text reveal">
+    <p class="hero-eyebrow">Portfolio 2024</p>
+    <h1 class="hero-name">
+      Divija<br>
+      <em>Gupta</em>
+    </h1>
+    <p class="hero-tagline">Artist. Athlete. Future Chartered Accountant.</p>
+    <div class="hero-chips">
+      <span class="chip">✏️ Sketch Artist</span>
+      <span class="chip">👗 Fashion Forward</span>
+      <span class="chip">🏃‍♀️ Track Star</span>
+      <span class="chip">🐾 Pet Lover</span>
+      <span class="chip">📊 Commerce Bound</span>
+    </div>
+    <a href="#about" class="hero-cta">Explore My World →</a>
+  </div>
+
+  <div class="hero-visual reveal">
+    <div class="avatar-frame">🎨</div>
+    <div class="floating-badge badge-1">✏️ Real-Life Sketching</div>
+    <div class="floating-badge badge-2">🏃‍♀️ Fastest Runner</div>
+    <div class="floating-badge badge-3">👗 Style Icon</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">A little about<br>me & my world</h2>
+    <p class="about-bio">
+      Hi! I'm Divija — a 15-year-old with a sketchbook always in hand and a race track under my feet.
+      I study at <strong>P.G Vora High School, Mira Road</strong>, where I'm known for being the fastest
+      runner, the sharpest dresser, and the girl who can bring any portrait to life with just a pencil.
+    </p>
+    <p class="about-bio">
+      My favourite colours are <strong>black &amp; white</strong> — classic, timeless, bold. Just like my art.
+      I believe in working hard, looking good, and chasing every dream at full sprint.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Age</div>
+        <div class="value">15 Years</div>
+      </div>
+      <div class="info-card">
+        <div class="label">School</div>
+        <div class="value">P.G Vora H.S.</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Location</div>
+        <div class="value">Mira Road</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Fav. Palette</div>
+        <div class="value">⚫ Black &amp; White</div>
+      </div>
+    </div>
+
+    <div class="pets-strip">
+      <h3>🐾 I absolutely adore animals</h3>
+      <div class="pets-icons">🐶 🐱 🐰 🐹 🦜</div>
+      <p style="font-size:0.85rem;color:var(--soft);margin-top:0.7rem;">Having pets teaches you patience, love, and how to sketch the cutest subjects imaginable.</p>
+    </div>
+  </div>
+
+  <div class="reveal" style="padding-top:4.5rem;">
+    <!-- decorative art panel -->
+    <div style="background: linear-gradient(145deg, var(--rose), var(--lilac)); border-radius:28px; padding:2.5rem; text-align:center; min-height: 400px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:1rem; box-shadow: 0 20px 50px rgba(201,166,198,0.3);">
+      <div style="font-size:6rem; line-height:1;">🖊️</div>
+      <p style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:900; color:var(--ink); line-height:1.2;">"Art is not what you see,<br>but what you make others see."</p>
+      <p style="font-size:0.8rem; color:var(--soft); letter-spacing:0.1em; text-transform:uppercase; margin-top:0.5rem;">— Edgar Degas</p>
+      <div style="margin-top:1.2rem; display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center;">
+        <span class="chip" style="background:rgba(255,255,255,0.7);">Portraits</span>
+        <span class="chip" style="background:rgba(255,255,255,0.7);">Landscapes</span>
+        <span class="chip" style="background:rgba(255,255,255,0.7);">Still Life</span>
+        <span class="chip" style="background:rgba(255,255,255,0.7);">Fashion Sketches</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label reveal">What I Do</p>
+  <h2 class="section-title reveal">Skills &amp; Strengths</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card reveal" style="--grad: linear-gradient(90deg,#f5dde5,#ede0f7);">
+      <div class="sk-icon">✏️</div>
+      <h3>Real-Life Sketching</h3>
+      <p>From detailed portraits to expressive still-life compositions — pencil and charcoal are my superpowers. Every line tells a story.</p>
+    </div>
+
+    <div class="skill-card reveal" style="--grad: linear-gradient(90deg,#f7f0d8,#fde8d0);">
+      <div class="sk-icon">👗</div>
+      <h3>Fashion &amp; Style</h3>
+      <p>My outfits are curated like art. With an eye for aesthetics sharpened by sketching, I see fashion as wearable creativity.</p>
+    </div>
+
+    <div class="skill-card reveal" style="--grad: linear-gradient(90deg,#daf0e8,#dceef8);">
+      <div class="sk-icon">🏃‍♀️</div>
+      <h3>Track &amp; Athletics</h3>
+      <p>The fastest runner in school — speed is discipline in motion. Athletics taught me focus, resilience, and how to push limits.</p>
+    </div>
+
+    <div class="skill-card reveal" style="--grad: linear-gradient(90deg,#e8e1f5,#dceef8);">
+      <div class="sk-icon">📐</div>
+      <h3>Creative Vision</h3>
+      <p>Whether it's a blank canvas or a room's colour palette, I have a natural instinct for what looks beautiful and intentional.</p>
+    </div>
+
+    <div class="skill-card reveal" style="--grad: linear-gradient(90deg,#fde8d0,#f5dde5);">
+      <div class="sk-icon">📊</div>
+      <h3>Analytical Mind</h3>
+      <p>Choosing Commerce shows I love numbers as much as art. Logic and creativity aren't opposites — they're my superpower duo.</p>
+    </div>
+
+    <div class="skill-card reveal" style="--grad: linear-gradient(90deg,#daf0e8,#f8e8e1);">
+      <div class="sk-icon">🐾</div>
+      <h3>Empathy &amp; Care</h3>
+      <p>A love for animals reflects a big heart. I bring that same warmth and patience into everything I do — art, sport, and life.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="section-label reveal">Sketchbook</p>
+  <h2 class="section-title reveal">My Artwork</h2>
+  <div class="gallery-mosaic reveal">
+    <div class="gallery-item wide" style="background:linear-gradient(135deg,#ede0f7,#f5dde5); font-size:5rem;">
+      🎨
+      <div class="sketch-label">Portrait Study — Charcoal</div>
+    </div>
+    <div class="gallery-item tall" style="background:linear-gradient(135deg,#daf0e8,#dceef8); font-size:4rem;">
+      🌿
+      <div class="sketch-label">Nature & Botanicals</div>
+    </div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#f7f0d8,#fde8d0);">
+      👗
+      <div class="sketch-label">Fashion Illustration</div>
+    </div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#f8e8e1,#ede0f7);">
+      🐶
+      <div class="sketch-label">Pet Portrait</div>
+    </div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#dceef8,#e8e1f5);">
+      🏙️
+      <div class="sketch-label">Cityscape Sketch</div>
+    </div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#fde8d0,#f5dde5);">
+      ✨
+      <div class="sketch-label">Abstract Composition</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:2rem; color:var(--soft); font-size:0.88rem; font-style:italic;">✏️ Each piece above represents a genre I sketch — add your real artwork to make this gallery yours!</p>
+</section>
+
+<!-- GOALS -->
+<section id="goals">
+  <div class="goals-layout">
+    <div class="reveal">
+      <p class="section-label">The Road Ahead</p>
+      <h2 class="section-title">My Dream:<br>Become a CA</h2>
+      <div class="goal-steps">
+
+        <div class="goal-step">
+          <div class="step-num">01</div>
+          <div class="step-text">
+            <h4>Choose Commerce Stream</h4>
+            <p>After Class 10, diving into Accounts, Economics, and Business Studies — the foundation of every great CA.</p>
+          </div>
+        </div>
+
+        <div class="goal-step">
+          <div class="step-num">02</div>
+          <div class="step-text">
+            <h4>Excel Academically</h4>
+            <p>Channelling the same discipline from the running track into the classroom — consistent, focused, and driven.</p>
+          </div>
+        </div>
+
+        <div class="goal-step">
+          <div class="step-num">03</div>
+          <div class="step-text">
+            <h4>Clear CA Foundation &amp; IPCC</h4>
+            <p>Registering with ICAI and clearing every level with dedication, hard work, and strategic preparation.</p>
+          </div>
+        </div>
+
+        <div class="goal-step">
+          <div class="step-num">04</div>
+          <div class="step-text">
+            <h4>Become a Chartered Accountant</h4>
+            <p>Combining creative thinking with financial expertise — a CA who's as bold in boardrooms as on the track.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ca-badge reveal">
+      <div class="big-icon">📜</div>
+      <h3>Future CA<br>Divija Gupta</h3>
+      <p>Where art meets ambition. Where speed meets strategy. A girl who knows exactly where she's headed — and sprints there.</p>
+      <div style="margin-top:2rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+        <span style="background:rgba(255,255,255,0.12); padding:0.5rem 1.2rem; border-radius:999px; font-size:0.8rem; color:rgba(255,255,255,0.8);">🎓 Commerce</span>
+        <span style="background:rgba(255,255,255,0.12); padding:0.5rem 1.2rem; border-radius:999px; font-size:0.8rem; color:rgba(255,255,255,0.8);">📊 ICAI</span>
+        <span style="background:rgba(255,255,255,0.12); padding:0.5rem 1.2rem; border-radius:999px; font-size:0.8rem; color:rgba(255,255,255,0.8);">💡 CA Final</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Divija Gupta</div>
+  <p>P.G Vora High School · Mira Road · Class of 2027</p>
+  <div class="socials">
+    <span title="Art">🎨</span>
+    <span title="Fashion">👗</span>
+    <span title="Running">🏃‍♀️</span>
+    <span title="Pets">🐾</span>
+    <span title="Future CA">📊</span>
+  </div>
+  <p style="font-size:0.78rem; opacity:0.45; margin-top:0.5rem;">Crafted with ✏️ passion & 🖤 black-and-white love</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav active link highlight
+  window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-links a');
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    links.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--ink)' : '';
+    });
+  });
+</script>
+</body>
+</html>
